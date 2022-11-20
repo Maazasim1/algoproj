@@ -9,10 +9,11 @@ import {
   Legend,
   PointElement,
   LineElement,
-  ArcElement
+  ArcElement,
+  RadialLinearScale
 
 } from 'chart.js';
-import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Doughnut, Line, Radar, Scatter } from 'react-chartjs-2';
 
 
 ChartJS.register(
@@ -24,7 +25,8 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  RadialLinearScale
 );
 
 export const options = {
@@ -85,7 +87,7 @@ export default function Charts(props) {
           <Doughnut options={options} data={data} />
         </div>
         <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
-          <Line options={options} data={data} />
+          <Scatter options={options} data={data}/>
         </div>
       </div>
 
