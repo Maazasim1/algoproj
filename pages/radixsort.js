@@ -84,7 +84,7 @@ return (
     <Navbar/>
     <div className='flex justify-center '>
 
-    <button className='bg-black p-5 rounded-full text-white my-5 w-36' onClick={handleClick}>
+     <button className='bg-black p-5 rounded-full text-white my-5 w-36 dark:border-white dark:border-2' onClick={handleClick}>
         SORT
     
     </button>
