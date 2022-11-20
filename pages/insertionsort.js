@@ -60,9 +60,9 @@ export default function Insertionsort() {
             </div>
        <h1>
            <div className='flex sm:flex-row flex-col justify-center text-center w-full'>
-        {sortarr.map((item)=>
+        {sortarr.map((item,index)=>
 
-            <div className='p-5 m-5 border border-spacing-4 border-orange-600 rounded-full'>
+            <div className='p-5 m-5 border border-spacing-4 border-orange-600 rounded-full' key={index}>
                 {item}
             </div>
         )}
