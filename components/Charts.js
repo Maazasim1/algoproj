@@ -35,7 +35,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Insertion Sort',
+      text: 'Sorting Algorithms',
     },
   },
 };
@@ -49,7 +49,7 @@ export default function Charts(props) {
   const data = {
     labels: labels,
     datasets: [{
-      label: 'My First Dataset',
+      label: 'Numbers',
       data: props.array,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -74,7 +74,7 @@ export default function Charts(props) {
   };
   return (
     <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 rounded p-10">
-      <div className='grid grid-flow-row-dense grid-cols-2 grid-row-2 gap-10 AdminPane'>
+      <div className='grid grid-flow-row-dense sm:grid-cols-2 gris-cols-1 grid-row-2 gap-10 AdminPane'>
         <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
           <Bar data={data} options={options} />
         </div>

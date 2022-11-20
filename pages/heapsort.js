@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 
-export default function Insertionsort() {
+export default function HeapSort() {
     let arr = [ 94, 56, 77, 8, 72, 30, 67, 4, 52, 2 ]; 
     const [sort,setSort]=useState(false);
     const [sortarr,setSortArr]=useState([...arr]);
@@ -12,32 +12,53 @@ export default function Insertionsort() {
       }
 
 
-  async  function insertionSort(sortarr,n) 
-    {   const array=[...sortarr]
-
-        
-        let i, key, j; 
-        for (i = 1; i < n; i++)
-        { 
-            key = array[i]; 
-            j = i - 1; 
-            while (j >= 0 && array[j] > key)
-            { 
-                
-                array[j + 1] = array[j]; 
-                j = j - 1; 
-           
-                await sleep(100,array)
-               
-               
-            } 
-            array[j + 1] = key; 
-        } 
-    } 
+    async  function heapsort(arr)
+      {
+          var N = arr.length;
+   
+          for (var i = Math.floor(N / 2) - 1; i >= 0; i--)
+             await heapify(arr, N, i);
+   
+          for (var i = N - 1; i > 0; i--) {
+              var temp = arr[0];
+              arr[0] = arr[i];
+              await sleep(1000,arr)
+              arr[i] = temp;
+              await sleep(1000,arr)
+   
+             await heapify(arr, i, 0);
+          }
+      }
+   
+      
+      
+   async   function heapify(arr, N, i)
+      {
+       
+          var largest = i; 
+          var l = 2 * i + 1; 
+          var r = 2 * i + 2; 
+   
+          if (l < N && arr[l] > arr[largest])
+              largest = l;
+   
+          if (r < N && arr[r] > arr[largest])
+              largest = r;
+   
+          if (largest != i) {
+              var swap = arr[i];
+              arr[i] = arr[largest];
+              await sleep(1000,arr)
+              arr[largest] = swap;
+              await sleep(1000,arr)
+   
+            await  heapify(arr, N, largest);
+          }
+      }
 
     useEffect(()=>{
         
-        insertionSort(sortarr,sortarr.length)
+        heapsort(sortarr,sortarr.length)
 
     },[sort])
 

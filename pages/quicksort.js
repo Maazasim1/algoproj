@@ -5,7 +5,7 @@ import { sleep } from '../utils/functions';
 
 export default function Bubblesort() {
     const updatedState={}
-    let arr = [94, 56, 77, 8, 72, 30, 67, 4, 52, 2];
+    let arr = [5,3,7,6,2,9];
     const [sort, setSort] = useState(false);
     const [sortarr, setSortArr] = useState([...arr]);
 
@@ -14,35 +14,54 @@ export default function Bubblesort() {
     }
 
 
-    function swap(arr, xp, yp)
-{
-    var temp = arr[xp];
-    arr[xp] = arr[yp];
-    arr[yp] = temp;
-}
+    async function swap(arr, leftIndex, rightIndex){
+        var temp = arr[leftIndex];
+        arr[leftIndex] = arr[rightIndex];
+        await sleep(1000,arr)
 
-    async function bubblesort(arrayparameter) {
-        const array=[...arrayparameter];
-        const n=array.length
-        var i, j;
-        for (i = 0; i < n - 1; i++) {
-            for (j = 0; j < n - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
-                    await sleep(100,array)
-                  
 
-                }
-           
-                
+        arr[rightIndex] = temp;
+        await sleep(1000,arr)
+
+    }
+    function partition(arr, left, right) {
+        var pivot   = arr[Math.floor((right + left) / 2)], 
+            i       = left, 
+            j       = right; 
+        while (i <= j) {
+            while (arr[i] < pivot) {
+                i++;
             }
-
+            while (arr[j] > pivot) {
+                j--;
+            }
+            if (i <= j) {
+                swap(arr, i, j); //sawpping two elements
+                i++;
+                j--;
+            }
         }
+        return i;
+    }
+    
+    async function quickSort(arr, left, right) {
+        var index;
+        if (arr.length > 1) {
+            index =await partition(arr, left, right); 
+            if (left < index - 1) { 
+                await quickSort(arr, left, index - 1);
+            }
+            if (index < right) { 
+              await  quickSort(arr, index, right);
+            }
+        }
+        await sleep(1000,arr)
+
     }
 
 
 useEffect(() => {
-    bubblesort(arr)
+    quickSort(arr,0,arr.length-1)
     console.log(arr+"Inside the useEffect Hook")
 
 }, [sort])

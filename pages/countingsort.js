@@ -14,35 +14,35 @@ export default function Bubblesort() {
     }
 
 
-    function swap(arr, xp, yp)
-{
-    var temp = arr[xp];
-    arr[xp] = arr[yp];
-    arr[yp] = temp;
+    async function countSort(arr)
+    {
+    var max = Math.max.apply(Math, arr);
+    var min = Math.min.apply(Math, arr);
+ 
+    var range = max - min + 1;
+    var count = Array.from({length: range}, (_, i) => 0);
+    var output = Array.from({length: arr.length}, (_, i) => 0);
+    for (let i = 0; i < arr.length; i++) {
+        count[arr[i] - min]++;
+    }
+ 
+    for (let i = 1; i < count.length; i++) {
+        count[i] += count[i - 1];
+    }
+ 
+    for (let i = arr.length - 1; i >= 0; i--) {
+        output[count[arr[i] - min] - 1] = arr[i];
+        count[arr[i] - min]--;
+    }
+ 
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = output[i];
+        await sleep(1000,arr)
+    }
 }
 
-    async function bubblesort(arrayparameter) {
-        const array=[...arrayparameter];
-        const n=array.length
-        var i, j;
-        for (i = 0; i < n - 1; i++) {
-            for (j = 0; j < n - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
-                    await sleep(100,array)
-                  
-
-                }
-           
-                
-            }
-
-        }
-    }
-
-
 useEffect(() => {
-    bubblesort(arr)
+    countSort(arr)
     console.log(arr+"Inside the useEffect Hook")
 
 }, [sort])
