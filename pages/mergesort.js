@@ -1,7 +1,6 @@
 import React, { useState, useEffect,useLayoutEffect } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
-
 export default function Mergesort() {
     let array = [94, 56, 77, 8, 72, 30, 67, 4, 52, 2];
     const [sort, setSort] = useState(false);

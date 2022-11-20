@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
-import { sleep } from '../utils/functions';
+import {useLayoutEffect} from 'react';
 
 export default function Bubblesort() {
     const updatedState={}

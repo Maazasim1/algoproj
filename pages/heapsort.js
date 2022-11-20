@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
-
+import {useLayoutEffect} from 'react';
 export default function HeapSort() {
     let arr = [ 94, 56, 77, 8, 72, 30, 67, 4, 52, 2 ]; 
     const [sort,setSort]=useState(false);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
-
+import {useLayoutEffect} from 'react';
 export default function Bucketsort() {
     let array = [0.897, 0.565,
         0.656, 0.1234,
