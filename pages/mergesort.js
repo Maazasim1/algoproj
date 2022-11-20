@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useLayoutEffect } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 
@@ -100,11 +100,69 @@ export default function Mergesort() {
 
     }, [sort])
 
+    const [fileSort, setFileSort] = useState(false);
+const [matrix,setMatrix]=useState([[]])
+
+function sleepforfilearray(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+useLayoutEffect(() => {
+     async function sortFiles(){
+
+         for (let index = 0; index < matrix.length; index++) {
+             let element=matrix[index]
+            await mergesort(element,0,element.length-1)
+            await sleepforfilearray(1000)
+            console.log(element+"Inside the useEffect Hook")
+            alert("move to next line?")
+            
+        }
+    }
+    sortFiles();
+
+}, [fileSort])
+
+
+  
+    function showFile(e) {
+        e.preventDefault()
+        const reader = new FileReader()
+        reader.onload =  async (e) => { 
+          const text = (e.target.result)
+          console.log(text)
+          const arrayformaipulation=convertFileToArrays(text)
+      
+        setMatrix(arrayformaipulation)
+        setFileSort(!fileSort)            
+        };
+        reader.readAsText(e.target.files[0])
+      
+   
+}
+function convertFileToArrays(text){
+    
+   let twodArray = text.split("\n").map(function(e) {return e.split(",").map(Number)
+
+});
+    console.log(twodArray)
+    
+    
+    return twodArray;
+    
+
+
+}
+
     return (
 
         <div>
             <Navbar />
-            <div className='flex justify-center '>
+            <div className='flex flex-col sm:flex-row items-center justify-around pt-5 text-center font-mono font-bold '>
+            <h1 className='p-2'>MERGE SORT</h1>
+            <h1 className='p-3'>TIME COMPLEXITY :O(N^2)</h1>
+            <input type="file" onChange={showFile} />
+
 
                  <button className='bg-black p-5 rounded-full text-white my-5 w-36 dark:border-white dark:border-2' onClick={handleClick}>
                     SORT
