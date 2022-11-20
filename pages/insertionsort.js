@@ -3,7 +3,7 @@ import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 import {useLayoutEffect} from 'react';
 export default function Insertionsort() {
-    const firstUpdate = useRef(true);
+
     let arr = [94, 56, 77, 8, 72, 30, 67, 4, 52, 2];
     const [sort, setSort] = useState(false);
     const [sortarr, setSortArr] = useState([...arr]);
@@ -52,7 +52,7 @@ export default function Insertionsort() {
     function sleepforfilearray(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
+    const firstUpdate = useRef(true);
     useLayoutEffect(() => {
         if (firstUpdate.current) {
             firstUpdate.current = false;
@@ -66,7 +66,11 @@ export default function Insertionsort() {
                 await insertionSort(element, element.length)
                 await sleepforfilearray(1000)
                 console.log(element + "Inside the useEffect Hook")
-                alert("move to next line?")
+                if((index+1)!==matrix.length)
+                {
+                    alert("move to next line?")
+
+                }
 
             }
         }

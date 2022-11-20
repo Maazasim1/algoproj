@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useLayoutEffect } from 'react'
+import React, { useState, useEffect,useLayoutEffect,useRef } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 export default function Mergesort() {
@@ -106,7 +106,13 @@ function sleepforfilearray(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-useLayoutEffect(() => {
+  const firstUpdate = useRef(true);
+    useLayoutEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+          }
+
      async function sortFiles(){
 
          for (let index = 0; index < matrix.length; index++) {
@@ -114,7 +120,12 @@ useLayoutEffect(() => {
             await mergesort(element,0,element.length-1)
             await sleepforfilearray(1000)
             console.log(element+"Inside the useEffect Hook")
-            alert("move to next line?")
+             if((index+1)!==matrix.length)
+                {
+                    alert("move to next line?")
+
+                }
+
             
         }
     }
