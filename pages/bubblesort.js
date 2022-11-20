@@ -132,14 +132,17 @@ return (
 
     <div>
     <Navbar/>
-    <div className='flex justify-center '>
-    <input type="file" onChange={showFile} />
+    <div className='flex flex-col sm:flex-row items-center justify-around pt-5 text-center font-mono font-bold '>
+            <h1 className='p-2'>BUBBLE SORT</h1>
+            <h1 className='p-3'>TIME COMPLEXITY :O(N^2)</h1>
+            <input type="file" onChange={showFile} />
 
-    <button className='bg-black p-5 rounded-full text-white my-5 w-36 dark:border-white dark:border-2' onClick={handleClick}>
-        SORT
-    
-    </button>
-        </div>
+
+                 <button className='bg-black p-5 rounded-full text-white my-5 w-36 dark:border-white dark:border-2' onClick={handleClick}>
+                    SORT
+
+                </button>
+            </div>
    <h1>
        <div className='flex sm:flex-row flex-col justify-center text-center w-full'>
     {sortarr.map((item,index)=>

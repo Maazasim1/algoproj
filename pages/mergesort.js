@@ -160,7 +160,7 @@ function convertFileToArrays(text){
             <Navbar />
             <div className='flex flex-col sm:flex-row items-center justify-around pt-5 text-center font-mono font-bold '>
             <h1 className='p-2'>MERGE SORT</h1>
-            <h1 className='p-3'>TIME COMPLEXITY :O(N^2)</h1>
+            <h1 className='p-3'>TIME COMPLEXITY :O(N LOG N)</h1>
             <input type="file" onChange={showFile} />
 
 
