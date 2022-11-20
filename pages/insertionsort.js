@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 import {useLayoutEffect} from 'react';
 export default function Insertionsort() {
+    const firstUpdate = useRef(true);
     let arr = [94, 56, 77, 8, 72, 30, 67, 4, 52, 2];
     const [sort, setSort] = useState(false);
     const [sortarr, setSortArr] = useState([...arr]);
@@ -53,6 +54,11 @@ export default function Insertionsort() {
     }
 
     useLayoutEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+          }
+        
         async function sortFiles() {
 
             for (let index = 0; index < matrix.length; index++) {
