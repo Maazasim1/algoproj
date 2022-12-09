@@ -63,6 +63,11 @@ export default function Navbar() {
                   Counting Sort
                   </Link>
                 </li>
+                  <li className="text-white p-5">
+                      <Link href="/bucketparallel">
+                          Parallel Sort
+                      </Link>
+                  </li>
               </ul>
 
               </div> : <></>
