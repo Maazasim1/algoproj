@@ -64,6 +64,16 @@ export default function Navbar() {
                   </Link>
                 </li>
                   <li className="text-white p-5">
+                      <Link href="/q1">
+                          7.4-5
+                      </Link>
+                  </li>
+                  <li className="text-white p-5">
+                      <Link href="/q2">
+                          8.2-4
+                      </Link>
+                  </li>
+                  <li className="text-white p-5">
                       <Link href="/bucketparallel">
                           Parallel Sort
                       </Link>

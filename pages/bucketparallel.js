@@ -1,38 +1,37 @@
-import React, { useState, useEffect,useLayoutEffect,useRef } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 import {sortFromServer} from "../lib/utils";
-
 export default function Parallelsort() {
-    const updatedState={}
-    let arr1 = [0.897, 0.565, 0.756, 0.1234, 0.665, 0.3434,0.2,0.4,0.9,0.0];
+
+    let arr1 = [0.897, 0.565, 0.756, 0.1234, 0.665, 0.3434,0.2,0.4,0.9,0.0,0.897, 0.565, 0.756, 0.1234, 0.665, 0.3434,0.2,0.4,0.9,0.0];
     const [sort, setSort] = useState(false);
 
     const [sortarr, setSortArr] = useState([...arr1]);
 
 
-    function sleep(ms,array) {
-        return new Promise(resolve => setTimeout(resolve, ms)).then(setSortArr([...array]));
-    }
 
 
 
 
-    async function swap(arr, xp, yp)
-    {
-        var temp = arr[xp];
-        arr[xp] = arr[yp];
-        arr[yp] = temp;
-        return arr;
-    }
+
 
 
 
 
     useEffect( () => {
         console.log(sortarr)
-        const sorted =  sortFromServer(arr1)
-        console.log(sorted+" server data sorted received")
+        async function fetchData() {
+            const dataFromServer = JSON.parse(await sortFromServer(arr1));
+            setSortArr(dataFromServer.sorted)
+
+            console.log(dataFromServer.sorted+" data from server");
+        }
+
+
+
+        fetchData().then(() => console.log("got data from server"));
+
         //  setSortArr(sorted)
         console.log(arr1 + "Inside the useEffect Hook")
 
@@ -51,34 +50,37 @@ export default function Parallelsort() {
     const [fileSort, setFileSort] = useState(false);
     const [matrix,setMatrix]=useState([[]])
 
-    function sleepforfilearray(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
-    const firstUpdate = useRef(true);
-    useLayoutEffect(() => {
-        if (firstUpdate.current) {
-            firstUpdate.current = false;
-            return;
-        }
 
-        async function sortFiles(){
+    const isMounted = useRef(false);
+    useEffect(() => {
 
-            for (let index = 0; index < matrix.length; index++) {
-                let element=matrix[index]
-                const sorted=await sortFromServer(element)
-                await sleepforfilearray(1000)
-                console.log(element+"Inside the useEffect Hook")
-                if((index+1)!==matrix.length)
-                {
-                    alert("move to next line?")
+        if (isMounted.current) {
+            async function sortFiles(){
+
+                for (let index = 0; index < matrix.length; index++) {
+                    let element=matrix[index]
+                    const sorted=JSON.parse(await sortFromServer(element))
+                    setSortArr(sorted.sorted)
+                    console.log(sorted.sorted+"file data sorted")
+                    console.log(element+"Inside the useEffect Hook")
+                    if((index+1)!==matrix.length)
+                    {
+                        alert("move to next line?")
+
+                    }
+
 
                 }
-
-
             }
+            sortFiles().then(() => console.log("data sorted"));
         }
-        sortFiles();
+        else
+        {
+            isMounted.current=true
+
+        }
+
 
     }, [fileSort])
 

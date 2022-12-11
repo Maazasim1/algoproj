@@ -3,7 +3,7 @@ import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 import {useLayoutEffect} from 'react';import { sleep } from '../utils/functions';
 
-export default function Bubblesort() {
+export default function Quicksort() {
     const updatedState={}
     let arr = [5,3,7,6,2,9];
     const [sort, setSort] = useState(false);
