@@ -3,7 +3,7 @@ import Navbar from '../components/navbar'
 import Charts from '../components/Charts';
 import {useLayoutEffect} from 'react';import { sleep } from '../utils/functions';
 
-export default function Bubblesort() {
+export default function Radixsort() {
     const updatedState={}
     let arr = [94, 56, 77, 8, 72, 30, 67, 4, 52, 2];
     const [sort, setSort] = useState(false);
@@ -55,14 +55,14 @@ async function countSort(arr,n,exp)
  
 
     
-function radixsort(arr,n)
+async function radixsort(arr,n)
 {
 
         let m = getMax(arr, n);
   
       
         for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10)
-            countSort(arr, n, exp);
+           await countSort(arr, n, exp);
 }
 
 
@@ -96,7 +96,7 @@ function sleepforfilearray(ms) {
 
          for (let index = 0; index < matrix.length; index++) {
              let element=matrix[index]
-            await bubblesort(element)
+            await radixsort(element)
             await sleepforfilearray(1000)
             console.log(element+"Inside the useEffect Hook")
              if((index+1)!==matrix.length)
